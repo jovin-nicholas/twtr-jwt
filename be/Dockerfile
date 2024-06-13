@@ -4,8 +4,11 @@ FROM python:3.9-slim-buster
 WORKDIR /app
 ADD . .
 #RUN apk update
+COPY ./ /app
 RUN apt-get update
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt 
+RUN pip3 uninstall pymongo -y && pip3 uninstall bson -y
+RUN pip3 install pymongo
 
 # run as non-root user
 RUN adduser --disabled-password myuser
